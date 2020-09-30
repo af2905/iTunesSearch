@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName
 class SearchResponse(
     @SerializedName("resultCount")
     @Expose
-    private val resultCount: Int? = null,
+    val resultCount: Int? = null,
 
     @SerializedName("results")
     @Expose
-    private val results: List<ArtistEntity>? = null
+    val results: List<ArtistEntity>? = null
 )

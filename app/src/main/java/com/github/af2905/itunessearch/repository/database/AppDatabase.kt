@@ -6,6 +6,6 @@ import com.github.af2905.itunessearch.repository.database.dao.ArtistDao
 import com.github.af2905.itunessearch.repository.database.entity.ArtistEntity
 
 @Database(entities = [ArtistEntity::class], version = 1, exportSchema = false)
-abstract class Database : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     abstract fun artistDao(): ArtistDao
 }
