@@ -1,4 +1,4 @@
-package com.github.af2905.itunessearch
+package com.github.af2905.itunessearch.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.github.af2905.itunessearch.R
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.

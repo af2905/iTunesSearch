@@ -1,9 +1,10 @@
-package com.github.af2905.itunessearch
+package com.github.af2905.itunessearch.presentation
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.github.af2905.itunessearch.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
