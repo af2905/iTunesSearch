@@ -1,7 +1,6 @@
 package com.github.af2905.itunessearch.di.module
 
 import com.github.af2905.itunessearch.BuildConfig
-import com.github.af2905.itunessearch.di.scope.ApiScope
 import com.github.af2905.itunessearch.repository.server.ApiService
 import com.github.af2905.itunessearch.repository.server.ServerCommunicator
 import dagger.Module
@@ -13,45 +12,71 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 class ApiModule {
+    @Singleton
     @Provides
-    @ApiScope
     fun providesServerCommunicator(apiService: ApiService): ServerCommunicator {
         return ServerCommunicator(apiService)
     }
 
+    @Singleton
     @Provides
-    @ApiScope
     fun providesApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
+    @Singleton
     @Provides
-    @ApiScope
     fun providesRetrofit(builder: Retrofit.Builder): Retrofit {
         return builder.baseUrl(BASE_URL).build()
     }
 
+    @Singleton
     @Provides
-    @ApiScope
-    fun providesRetrofitBuilder(): Retrofit.Builder {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = when (BuildConfig.DEBUG) {
-            true -> HttpLoggingInterceptor.Level.BODY
-            else -> HttpLoggingInterceptor.Level.NONE
-        }
-        val okHttpClient = OkHttpClient.Builder()
+    fun providesRetrofitBuilder(
+        client: OkHttpClient, converter: GsonConverterFactory, adapter: RxJava2CallAdapterFactory
+    ): Retrofit.Builder {
+        return Retrofit.Builder().client(client)
+            .addConverterFactory(converter)
+            .addCallAdapterFactory(adapter)
+    }
+
+    @Singleton
+    @Provides
+    fun providesCallAdapterFactory(): RxJava2CallAdapterFactory {
+        return RxJava2CallAdapterFactory.create()
+    }
+
+    @Singleton
+    @Provides
+    fun providesConverterFactory(): GsonConverterFactory {
+        return GsonConverterFactory.create()
+    }
+
+    @Singleton
+    @Provides
+    fun providesOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient {
+        return OkHttpClient.Builder()
             .connectionPool(ConnectionPool(5, 30, TimeUnit.SECONDS))
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(interceptor)
             .build()
-        return Retrofit.Builder().client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+    }
+
+    @Singleton
+    @Provides
+    fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = when (BuildConfig.DEBUG) {
+            true -> HttpLoggingInterceptor.Level.BODY
+            else -> HttpLoggingInterceptor.Level.NONE
+        }
+        return interceptor
     }
 
     companion object {
