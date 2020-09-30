@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "artists")
-class ArtistEntity(
+data class ArtistEntity(
     @SerializedName("wrapperType")
     @Expose
     val wrapperType: String? = null,

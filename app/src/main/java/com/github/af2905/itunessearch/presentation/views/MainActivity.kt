@@ -1,14 +1,14 @@
-package com.github.af2905.itunessearch.presentation
+package com.github.af2905.itunessearch.presentation.views
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.github.af2905.itunessearch.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+    //lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,10 +16,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+
+        //navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+
+       /* val search = findViewById<TextView>(R.id.txt_search)
+        search.setOnClickListener(this)*/
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -29,8 +31,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_search -> true
+            R.id.action_search -> {
+                //navController.navigate(R.id.action_FirstFragment_to_SecondFragment)
+                                true}
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onClick(v: View?) {
+
     }
 }

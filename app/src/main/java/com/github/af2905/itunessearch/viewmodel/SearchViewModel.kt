@@ -10,7 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class ArtistsViewModel(application: Application, private val repository: Repository) :
+class SearchViewModel(application: Application, private val repository: Repository) :
     AndroidViewModel(application) {
     private val disposeBag = CompositeDisposable()
     private val liveDataFoundArtists = MutableLiveData<List<ArtistEntity>>()
