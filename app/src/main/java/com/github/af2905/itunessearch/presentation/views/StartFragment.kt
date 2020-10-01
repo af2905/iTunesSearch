@@ -9,7 +9,6 @@ import com.github.af2905.itunessearch.R
 
 class StartFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
