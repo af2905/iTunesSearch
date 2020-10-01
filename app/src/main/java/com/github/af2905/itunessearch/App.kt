@@ -2,12 +2,17 @@ package com.github.af2905.itunessearch
 
 import android.app.Application
 import androidx.room.Room
-import com.github.af2905.itunessearch.di.component.*
-import com.github.af2905.itunessearch.di.module.ApiModule
-import com.github.af2905.itunessearch.di.module.DatabaseModule
-import com.github.af2905.itunessearch.di.module.RepositoryModule
-import com.github.af2905.itunessearch.di.module.ViewModelModule
+import com.github.af2905.itunessearch.di.api.ApiModule
+import com.github.af2905.itunessearch.di.api.DaggerApiComponent
+import com.github.af2905.itunessearch.di.database.DaggerDatabaseComponent
+import com.github.af2905.itunessearch.di.database.DatabaseModule
+import com.github.af2905.itunessearch.di.repository.DaggerRepositoryComponent
+import com.github.af2905.itunessearch.di.repository.RepositoryModule
+import com.github.af2905.itunessearch.di.viewmodel.DaggerViewModelComponent
+import com.github.af2905.itunessearch.di.viewmodel.ViewModelComponent
+import com.github.af2905.itunessearch.di.viewmodel.ViewModelModule
 import com.github.af2905.itunessearch.repository.database.AppDatabase
+
 
 class App : Application() {
     private lateinit var database: AppDatabase
