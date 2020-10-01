@@ -9,6 +9,11 @@ import dagger.Provides
 
 @Module
 class RepositoryModule {
+    /* @RepositoryScope
+   @Provides
+/  fun providesRepository(communicator: ServerCommunicator, dao: ArtistDao): Repository {
+       return Repository(communicator, dao)
+   }*/
     @RepositoryScope
     @Provides
     fun providesRepository(communicator: ServerCommunicator, database: AppDatabase): Repository {
