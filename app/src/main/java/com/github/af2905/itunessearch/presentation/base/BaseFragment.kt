@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.github.af2905.itunessearch.App
-import com.github.af2905.itunessearch.di.component.ViewModelComponent
+import com.github.af2905.itunessearch.di.viewmodel.ViewModelComponent
 
 abstract class BaseFragment : Fragment() {
     private lateinit var activity: AppCompatActivity
