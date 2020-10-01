@@ -30,18 +30,13 @@ class ApiModule {
 
     @Singleton
     @Provides
-    fun providesRetrofit(builder: Retrofit.Builder): Retrofit {
-        return builder.baseUrl(BASE_URL).build()
-    }
-
-    @Singleton
-    @Provides
-    fun providesRetrofitBuilder(
+    fun providesRetrofit(
         client: OkHttpClient, converter: GsonConverterFactory, adapter: RxJava2CallAdapterFactory
-    ): Retrofit.Builder {
+    ): Retrofit {
         return Retrofit.Builder().client(client)
             .addConverterFactory(converter)
             .addCallAdapterFactory(adapter)
+            .baseUrl(BASE_URL).build()
     }
 
     @Singleton
