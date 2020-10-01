@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="horizontal"
-    tools:context=".presentation.views.StartFragment">
+    tools:context=".presentation.views.fragments.SearchFragment">
 
     <TextView
         android:id="@+id/txt_search"

@@ -1,4 +1,4 @@
-package com.github.af2905.itunessearch.presentation.views
+package com.github.af2905.itunessearch.presentation.views.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,14 +22,14 @@ class SearchFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_second, container, false)
+        return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-/*        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }*/
+        viewModel?.downloadArtistsUponRequest()
+        /* view.findViewById<Button>(R.id.button_first).setOnClickListener {
+             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+         }*/
     }
 }

@@ -1,4 +1,4 @@
-package com.github.af2905.itunessearch.presentation.views
+package com.github.af2905.itunessearch.presentation.views.activity
 
 import android.os.Bundle
 import android.view.Menu

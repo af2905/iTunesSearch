@@ -12,23 +12,19 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 @Module
 class ApiModule {
-    @Singleton
     @Provides
     fun providesServerCommunicator(apiService: ApiService): ServerCommunicator {
         return ServerCommunicator(apiService)
     }
 
-    @Singleton
     @Provides
     fun providesApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
-    @Singleton
     @Provides
     fun providesRetrofit(
         client: OkHttpClient, converter: GsonConverterFactory, adapter: RxJava2CallAdapterFactory
@@ -39,19 +35,16 @@ class ApiModule {
             .baseUrl(BASE_URL).build()
     }
 
-    @Singleton
     @Provides
     fun providesCallAdapterFactory(): RxJava2CallAdapterFactory {
         return RxJava2CallAdapterFactory.create()
     }
 
-    @Singleton
     @Provides
     fun providesConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
     }
 
-    @Singleton
     @Provides
     fun providesOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
@@ -63,7 +56,6 @@ class ApiModule {
             .build()
     }
 
-    @Singleton
     @Provides
     fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
