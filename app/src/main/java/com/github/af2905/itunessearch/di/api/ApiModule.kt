@@ -1,7 +1,6 @@
-package com.github.af2905.itunessearch.di.module
+package com.github.af2905.itunessearch.di.api
 
 import com.github.af2905.itunessearch.BuildConfig
-import com.github.af2905.itunessearch.di.scope.ApiScope
 import com.github.af2905.itunessearch.repository.server.ApiService
 import com.github.af2905.itunessearch.repository.server.ServerCommunicator
 import dagger.Module
@@ -17,25 +16,21 @@ import java.util.concurrent.TimeUnit
 @Module
 class ApiModule {
     @Provides
-    @ApiScope
     fun providesServerCommunicator(apiService: ApiService): ServerCommunicator {
         return ServerCommunicator(apiService)
     }
 
     @Provides
-    @ApiScope
     fun providesApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
     @Provides
-    @ApiScope
     fun providesRetrofit(builder: Retrofit.Builder): Retrofit {
         return builder.baseUrl(BASE_URL).build()
     }
 
     @Provides
-    @ApiScope
     fun providesRetrofitBuilder(): Retrofit.Builder {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = when (BuildConfig.DEBUG) {
