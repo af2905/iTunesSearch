@@ -1,4 +1,4 @@
-package com.github.af2905.itunessearch.di.module
+package com.github.af2905.itunessearch.di.database
 
 import android.content.Context
 import androidx.room.Room

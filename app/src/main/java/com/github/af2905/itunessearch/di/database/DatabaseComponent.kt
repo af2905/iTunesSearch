@@ -1,6 +1,5 @@
-package com.github.af2905.itunessearch.di.component
+package com.github.af2905.itunessearch.di.database
 
-import com.github.af2905.itunessearch.di.module.DatabaseModule
 import com.github.af2905.itunessearch.repository.database.AppDatabase
 import dagger.Component
 

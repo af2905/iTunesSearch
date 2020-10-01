@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.af2905.itunessearch.R
-import com.github.af2905.itunessearch.di.component.ViewModelComponent
+import com.github.af2905.itunessearch.di.viewmodel.ViewModelComponent
 import com.github.af2905.itunessearch.presentation.base.BaseFragment
 import com.github.af2905.itunessearch.viewmodel.SearchViewModel
 import javax.inject.Inject
@@ -19,8 +19,8 @@ class SearchFragment : BaseFragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
