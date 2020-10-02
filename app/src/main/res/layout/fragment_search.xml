@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/feed_header" />
+    <include layout="@layout/search_header" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
