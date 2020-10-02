@@ -11,52 +11,52 @@ import com.github.af2905.itunessearch.R
 import kotlinx.android.synthetic.main.search_toolbar.view.*
 
 class SearchBar @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyle: Int = 0
-    ) : FrameLayout(context, attrs, defStyle) {
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyle: Int = 0
+) : FrameLayout(context, attrs, defStyle) {
 
-        val editText: EditText by lazy { search_edit_text }
+    private val editText: EditText by lazy { search_edit_text }
 
-        private var hint: String = ""
-        private var isCancelVisible: Boolean = true
+    private var hint: String = ""
+    private var isCancelVisible: Boolean = true
 
-        init {
-            LayoutInflater.from(context).inflate(R.layout.search_toolbar, this)
-            if (attrs != null) {
-                context.obtainStyledAttributes(attrs, R.styleable.SearchBar).apply {
-                    hint = getString(R.styleable.SearchBar_hint).orEmpty()
-                    isCancelVisible = getBoolean(R.styleable.SearchBar_cancel_visible, true)
-                    recycle()
-                }
+    init {
+        LayoutInflater.from(context).inflate(R.layout.search_toolbar, this)
+        if (attrs != null) {
+            context.obtainStyledAttributes(attrs, R.styleable.SearchBar).apply {
+                hint = getString(R.styleable.SearchBar_hint).orEmpty()
+                isCancelVisible = getBoolean(R.styleable.SearchBar_cancel_visible, true)
+                recycle()
             }
         }
-
-        fun setText(text: String?) {
-            this.editText.setText(text)
+        search_edit_text.hint = hint
+        delete_text_button.setOnClickListener {
+            search_edit_text.text.clear()
         }
+    }
 
-        fun clear() {
-            this.editText.setText("")
-        }
+    fun setText(text: String?) {
+        this.editText.setText(text)
+    }
 
-        override fun onFinishInflate() {
-            super.onFinishInflate()
-            search_edit_text.hint = hint
-            delete_text_button.setOnClickListener {
-                search_edit_text.text.clear()
+    fun clear() {
+        this.editText.setText("")
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        search_edit_text.afterTextChanged { text ->
+            if (text?.isNotBlank() == true && !delete_text_button.isVisible) {
+                delete_text_button.visibility = View.VISIBLE
+            }
+            if (text.isNullOrEmpty() && delete_text_button.isVisible) {
+                delete_text_button.visibility = View.GONE
             }
         }
-
-        override fun onAttachedToWindow() {
-            super.onAttachedToWindow()
-            search_edit_text.afterTextChanged { text ->
-                if (!text.isNullOrEmpty() && !delete_text_button.isVisible) {
-                    delete_text_button.visibility = View.VISIBLE
-                }
-                if (text.isNullOrEmpty() && delete_text_button.isVisible) {
-                    delete_text_button.visibility = View.GONE
-                }
-            }
-        }
+    }
 }

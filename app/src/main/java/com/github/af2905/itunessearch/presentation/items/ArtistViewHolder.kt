@@ -7,14 +7,14 @@ import kotlinx.android.synthetic.main.item_artist.view.*
 
 class ArtistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private lateinit var artist: ArtistEntity
-    private lateinit var clickListener: IArtistClickListener<ArtistEntity>
-    private val openAlbums = View.OnClickListener { clickListener.openAlbums(artist) }
+/*    private lateinit var clickListener: IArtistClickListener<ArtistEntity>
+    private val openAlbums = View.OnClickListener { clickListener.openAlbums(artist) }*/
 
     val artistName = itemView.artist_name_text_view
 
-    fun bind(artist: ArtistEntity, clickListener: IArtistClickListener<ArtistEntity>) {
+    fun bind(artist: ArtistEntity) {
         this.artist = artist
-        this.clickListener = clickListener
-        itemView.setOnClickListener(openAlbums)
+       /* this.clickListener = clickListener
+        itemView.setOnClickListener(openAlbums)*/
     }
 }
