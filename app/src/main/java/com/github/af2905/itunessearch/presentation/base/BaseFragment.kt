@@ -8,7 +8,7 @@ import com.github.af2905.itunessearch.App
 import com.github.af2905.itunessearch.di.viewmodel.ViewModelComponent
 
 abstract class BaseFragment : Fragment() {
-    private lateinit var activity: AppCompatActivity
+    lateinit var activity: AppCompatActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
