@@ -6,19 +6,20 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
+    //https://itunes.apple.com/search?term=maroon&media=music&entity=musicArtist
     @GET("search")
     fun getArtists(
         @Query(QUERY_PARAM_TERM) term: String,
-        @Query(QUERY_PARAM_ENTITY) entity: String = ALL_ARTIST,
-        @Query(QUERY_PARAM_ATTRIBUTE) attribute: String = ALL_ARTIST_TERM
+        @Query(QUERY_PARAM_MEDIA) attribute: String = MUSIC,
+        @Query(QUERY_PARAM_ENTITY) entity: String = MUSIC_ARTIST
     ): Single<SearchResponse>
 
     companion object {
         private const val QUERY_PARAM_TERM = "term"
+        private const val QUERY_PARAM_MEDIA = "media"
         private const val QUERY_PARAM_ENTITY = "entity"
-        private const val QUERY_PARAM_ATTRIBUTE = "attribute"
 
-        private const val ALL_ARTIST = "allArtist"
-        private const val ALL_ARTIST_TERM = "allArtistTerm"
+        private const val MUSIC = "music"
+        private const val MUSIC_ARTIST = "musicArtist"
     }
 }

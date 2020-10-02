@@ -3,6 +3,7 @@ package com.github.af2905.itunessearch.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.github.af2905.itunessearch.repository.Repository
 import com.github.af2905.itunessearch.repository.database.entity.ArtistEntity
@@ -15,9 +16,9 @@ class SearchViewModel(application: Application, private val repository: Reposito
     private val disposeBag = CompositeDisposable()
     private val liveDataFoundArtists = MutableLiveData<List<ArtistEntity>>()
 
-    fun downloadArtistsUponRequest() {
+    fun downloadArtistsUponRequest(term: String) {
         disposeBag.add(
-            repository.getArtists("martin")
+            repository.getArtists(term)
                 .retry()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -28,6 +29,10 @@ class SearchViewModel(application: Application, private val repository: Reposito
 
                 })
         )
+    }
+
+    fun getLiveDataFoundArtists(): LiveData<List<ArtistEntity>>{
+        return liveDataFoundArtists
     }
 
     override fun onCleared() {
