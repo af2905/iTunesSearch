@@ -17,9 +17,11 @@ class ArtistAdapter(private val clickListener: IArtistClickListener<ArtistEntity
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_artist, parent, false)
         val holder = ArtistViewHolder(view)
-        val position = holder.adapterPosition
-        if (position != RecyclerView.NO_POSITION) {
-            clickListener.openAlbums(getItem(position))
+        holder.itemView.setOnClickListener {
+            val position = holder.adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                clickListener.openAlbums(getItem(position))
+            }
         }
         return holder
     }

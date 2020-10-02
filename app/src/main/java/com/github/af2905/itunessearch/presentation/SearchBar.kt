@@ -44,10 +44,6 @@ class SearchBar @JvmOverloads constructor(
         this.editText.setText("")
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-    }
-
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         search_edit_text.afterTextChanged { text ->

@@ -1,14 +1,11 @@
 package com.github.af2905.itunessearch.presentation.base
 
-import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.github.af2905.itunessearch.App
 import com.github.af2905.itunessearch.di.viewmodel.ViewModelComponent
 
 abstract class BaseFragment : Fragment() {
-    lateinit var activity: AppCompatActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,12 +13,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     private fun createDaggerDependencies() =
-        injectDependency((activity.application as App).getViewModelComponent())
+        injectDependency((requireActivity().application as App).getViewModelComponent())
 
     abstract fun injectDependency(component: ViewModelComponent)
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        activity = context as AppCompatActivity
-    }
 }
