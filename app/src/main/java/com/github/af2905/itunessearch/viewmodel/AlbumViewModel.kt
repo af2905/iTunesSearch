@@ -1,6 +1,7 @@
 package com.github.af2905.itunessearch.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.af2905.itunessearch.repository.Repository
@@ -9,10 +10,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class AlbumsViewModel(private val repository: Repository) : ViewModel() {
+class AlbumViewModel(private val repository: Repository) : ViewModel() {
     private val disposeBag = CompositeDisposable()
     private val liveDataFoundAlbums = MutableLiveData<List<AlbumEntity>>()
-
 
     fun downloadAlbumsUponRequest(artistId: Int) {
         disposeBag.add(
@@ -27,6 +27,10 @@ class AlbumsViewModel(private val repository: Repository) : ViewModel() {
 
                 })
         )
+    }
+
+    fun getLiveDataFoundAlbums(): LiveData<List<AlbumEntity>> {
+        return liveDataFoundAlbums
     }
 
     override fun onCleared() {

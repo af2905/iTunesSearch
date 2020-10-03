@@ -27,7 +27,6 @@ class ArtistAdapter(private val clickListener: IArtistClickListener<ArtistEntity
     }
 
     override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
-        holder.bind(getItem(position))
         holder.artistName.text = getItem(position).artistName
     }
 }

@@ -50,10 +50,6 @@ class SearchFragment : BaseFragment() {
         loadDataFromViewModel()
         search_toolbar.search_edit_text.afterTextChanged {
             viewModel?.downloadArtistsUponRequest(it.toString())
-
-            /* view.findViewById<Button>(R.id.button_first).setOnClickListener {
-                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-             }*/
         }
     }
 
@@ -65,6 +61,8 @@ class SearchFragment : BaseFragment() {
     private fun showAlbums(artist: ArtistEntity) {
         val bundle = Bundle()
         bundle.putInt("id", artist.artistId)
+        bundle.putString("name", artist.artistName)
+
         findNavController().navigate(R.id.action_SearchFragment_to_AlbumsFragment, bundle)
     }
 }
