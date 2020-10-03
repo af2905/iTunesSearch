@@ -1,36 +1,32 @@
 package com.github.af2905.itunessearch.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.af2905.itunessearch.repository.Repository
-import com.github.af2905.itunessearch.repository.database.entity.ArtistEntity
+import com.github.af2905.itunessearch.repository.database.entity.AlbumEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class SearchViewModel(private val repository: Repository) : ViewModel() {
+class AlbumsViewModel(private val repository: Repository) : ViewModel() {
     private val disposeBag = CompositeDisposable()
-    private val liveDataFoundArtists = MutableLiveData<List<ArtistEntity>>()
+    private val liveDataFoundAlbums = MutableLiveData<List<AlbumEntity>>()
 
-    fun downloadArtistsUponRequest(term: String) {
+
+    fun downloadAlbumsUponRequest(artistId: Int) {
         disposeBag.add(
-            repository.getArtists(term)
+            repository.getAlbums(artistId)
                 .retry()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     Log.d(TAG, it.toString())
-                    liveDataFoundArtists.value = it
+                    liveDataFoundAlbums.value = it
                 }, {
 
                 })
         )
-    }
-
-    fun getLiveDataFoundArtists(): LiveData<List<ArtistEntity>> {
-        return liveDataFoundArtists
     }
 
     override fun onCleared() {
@@ -42,3 +38,5 @@ class SearchViewModel(private val repository: Repository) : ViewModel() {
         private const val TAG = "TEST_OF_LOADING_DATA"
     }
 }
+
+

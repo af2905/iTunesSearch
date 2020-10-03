@@ -36,7 +36,7 @@ class App : Application() {
 
         viewModelComponent = DaggerViewModelComponent.builder()
             .repositoryComponent(repositoryComponent)
-            .viewModelModule(ViewModelModule(this))
+            .viewModelModule(ViewModelModule())
             .build()
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.af2905.itunessearch.R
 import com.github.af2905.itunessearch.di.viewmodel.ViewModelComponent
@@ -24,7 +25,7 @@ class SearchFragment : BaseFragment() {
     private val artistClickListener: IArtistClickListener<ArtistEntity> =
         object : IArtistClickListener<ArtistEntity> {
             override fun openAlbums(m: ArtistEntity) {
-                TODO("Not yet implemented")
+                showAlbums(m)
             }
         }
 
@@ -36,8 +37,7 @@ class SearchFragment : BaseFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
@@ -60,5 +60,11 @@ class SearchFragment : BaseFragment() {
     private fun loadDataFromViewModel() {
         viewModel?.getLiveDataFoundArtists()
             ?.observe(viewLifecycleOwner, { adapter.submitList(it) })
+    }
+
+    private fun showAlbums(artist: ArtistEntity) {
+        val bundle = Bundle()
+        bundle.putInt("id", artist.artistId)
+        findNavController().navigate(R.id.action_SearchFragment_to_AlbumsFragment, bundle)
     }
 }
