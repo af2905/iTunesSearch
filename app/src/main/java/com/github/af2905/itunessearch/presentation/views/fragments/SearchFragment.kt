@@ -54,7 +54,7 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun loadDataFromViewModel() {
-        viewModel?.getLiveDataFoundArtists()
+        viewModel?.getLiveDataArtists()
             ?.observe(viewLifecycleOwner, { adapter.submitList(it) })
     }
 
@@ -62,6 +62,6 @@ class SearchFragment : BaseFragment() {
         val bundle = Bundle()
         bundle.putInt("id", artist.artistId)
         bundle.putString("name", artist.artistName)
-        findNavController().navigate(R.id.action_SearchFragment_to_AlbumsFragment, bundle)
+        findNavController().navigate(R.id.action_SearchFragment_to_AlbumFragment, bundle)
     }
 }

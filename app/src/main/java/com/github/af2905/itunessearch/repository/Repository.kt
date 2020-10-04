@@ -3,6 +3,7 @@ package com.github.af2905.itunessearch.repository
 import com.github.af2905.itunessearch.repository.database.AppDatabase
 import com.github.af2905.itunessearch.repository.database.entity.AlbumEntity
 import com.github.af2905.itunessearch.repository.database.entity.ArtistEntity
+import com.github.af2905.itunessearch.repository.database.entity.TrackEntity
 import com.github.af2905.itunessearch.repository.server.ServerCommunicator
 import io.reactivex.Single
 
@@ -16,5 +17,11 @@ class Repository(private val communicator: ServerCommunicator, private val datab
         return communicator.getAlbums(artistId)
             .map { database.albumDao().insertAlbums(it) }
             .flatMap { return@flatMap Single.just(database.albumDao().getAll(artistId)) }
+    }
+
+    fun getTracks(collectionId: Int): Single<List<TrackEntity>> {
+        return communicator.getTracks(collectionId)
+            .map { database.trackDao().insertTracks(it) }
+            .flatMap { return@flatMap Single.just(database.trackDao().getAll(collectionId)) }
     }
 }

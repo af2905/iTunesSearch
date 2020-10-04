@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.af2905.itunessearch.R
 import com.github.af2905.itunessearch.di.viewmodel.ViewModelComponent
@@ -26,7 +26,7 @@ class AlbumFragment : BaseFragment() {
     private val albumClickListener: IAlbumClickListener<AlbumEntity> =
         object : IAlbumClickListener<AlbumEntity> {
             override fun openAlbumDetail(m: AlbumEntity) {
-                Toast.makeText(requireContext(), "click!", Toast.LENGTH_SHORT).show()
+                showAlbumDetail(m)
             }
         }
     var viewModel: AlbumViewModel? = null
@@ -55,7 +55,18 @@ class AlbumFragment : BaseFragment() {
     }
 
     private fun loadDataFromViewModel() {
-        viewModel?.getLiveDataFoundAlbums()
+        viewModel?.getLiveDataAlbums()
             ?.observe(viewLifecycleOwner, { adapter.submitList(it) })
+    }
+
+    private fun showAlbumDetail(album: AlbumEntity) {
+        val bundle = Bundle()
+        bundle.putInt("id", album.collectionId)
+        bundle.putString("imageUrl", album.artworkUrl100)
+        bundle.putString("genreName", album.primaryGenreName)
+        bundle.putString("releaseDate", album.releaseDate)
+        bundle.putString("collectionName", album.collectionName)
+        album.trackCount?.let { bundle.putInt("trackCount", it) }
+        findNavController().navigate(R.id.action_AlbumFragment_to_TrackFragment, bundle)
     }
 }
