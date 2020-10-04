@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.github.af2905.itunessearch.Constants.ARTIST_ID
+import com.github.af2905.itunessearch.Constants.ARTIST_NAME
 import com.github.af2905.itunessearch.R
 import com.github.af2905.itunessearch.di.viewmodel.ViewModelComponent
 import com.github.af2905.itunessearch.presentation.adapters.ArtistAdapter
@@ -60,8 +62,8 @@ class SearchFragment : BaseFragment() {
 
     private fun showAlbums(artist: ArtistEntity) {
         val bundle = Bundle()
-        bundle.putInt("id", artist.artistId)
-        bundle.putString("name", artist.artistName)
+        bundle.putInt(ARTIST_ID, artist.artistId)
+        bundle.putString(ARTIST_NAME, artist.artistName)
         findNavController().navigate(R.id.action_SearchFragment_to_AlbumFragment, bundle)
     }
 }

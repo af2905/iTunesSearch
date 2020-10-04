@@ -53,7 +53,7 @@
                             android:layout_height="wrap_content"
                             android:maxLines="2"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
+                            android:textSize="24sp"
                             tools:text="Ricky Martin" />
 
                         <TextView
@@ -73,13 +73,6 @@
                             android:textColor="@color/textColorLight"
                             tools:text="13 songs" />
 
-                        <TextView
-                            android:id="@+id/release_date_text_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:textColor="@color/textColorLight"
-                            tools:text="Released: February 10, 2005" />
                     </LinearLayout>
                 </LinearLayout>
 

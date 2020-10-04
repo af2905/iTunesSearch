@@ -10,4 +10,6 @@
     <string name="search_hint">enter artist name</string>
     <string name="close">close</string>
     <string name="main_title">What\'s your favorite artist?</string>
+    <string name="songs">songs</string>
+
 </resources>

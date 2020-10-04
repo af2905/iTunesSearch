@@ -5,7 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
+import com.github.af2905.itunessearch.Constants.ALBUM_ID
+import com.github.af2905.itunessearch.Constants.ALBUM_NAME
+import com.github.af2905.itunessearch.Constants.ALBUM_URL
+import com.github.af2905.itunessearch.Constants.ARTIST_ID
+import com.github.af2905.itunessearch.Constants.ARTIST_NAME
+import com.github.af2905.itunessearch.Constants.GENRE_NAME
+import com.github.af2905.itunessearch.Constants.TRACK_COUNT
 import com.github.af2905.itunessearch.R
 import com.github.af2905.itunessearch.di.viewmodel.ViewModelComponent
 import com.github.af2905.itunessearch.presentation.adapters.AlbumAdapter
@@ -17,11 +23,8 @@ import com.github.af2905.itunessearch.viewmodel.AlbumViewModel
 import kotlinx.android.synthetic.main.artist_header.*
 import kotlinx.android.synthetic.main.fragment_album.*
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 class AlbumFragment : BaseFragment() {
-    private var artistId by Delegates.notNull<Int>()
-    private lateinit var recycler: RecyclerView
     private lateinit var adapter: AlbumAdapter
     private val albumClickListener: IAlbumClickListener<AlbumEntity> =
         object : IAlbumClickListener<AlbumEntity> {
@@ -45,11 +48,11 @@ class AlbumFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = AlbumAdapter(albumClickListener)
-        recycler = albums_recycler_view
+        val recycler = albums_recycler_view
         recycler.adapter = adapter
         recycler.addItemDecoration(DivItemDecoration(16, 8))
-        artistId = requireArguments().getInt("id")
-        artist_name_text_view.text = requireArguments().getString("name")
+        val artistId = requireArguments().getInt(ARTIST_ID)
+        artist_name_text_view.text = requireArguments().getString(ARTIST_NAME)
         viewModel?.downloadAlbumsUponRequest(artistId)
         loadDataFromViewModel()
     }
@@ -61,12 +64,12 @@ class AlbumFragment : BaseFragment() {
 
     private fun showAlbumDetail(album: AlbumEntity) {
         val bundle = Bundle()
-        bundle.putInt("id", album.collectionId)
-        bundle.putString("imageUrl", album.artworkUrl100)
-        bundle.putString("genreName", album.primaryGenreName)
-        bundle.putString("releaseDate", album.releaseDate)
-        bundle.putString("collectionName", album.collectionName)
-        album.trackCount?.let { bundle.putInt("trackCount", it) }
+        bundle.putInt(ALBUM_ID, album.collectionId)
+        bundle.putString(ALBUM_URL, album.artworkUrl100)
+        bundle.putString(GENRE_NAME, album.primaryGenreName)
+        bundle.putString(ALBUM_NAME, album.collectionName)
+        bundle.putString(ARTIST_NAME, album.artistName)
+        album.trackCount?.let { bundle.putInt(TRACK_COUNT, it) }
         findNavController().navigate(R.id.action_AlbumFragment_to_TrackFragment, bundle)
     }
 }
