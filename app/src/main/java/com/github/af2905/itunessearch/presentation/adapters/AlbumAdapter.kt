@@ -28,20 +28,10 @@ class AlbumAdapter(private val clickListener: IAlbumClickListener<AlbumEntity>) 
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        val imgUrl = getItem(position).artworkUrl100
-
-        if (imgUrl != null) {
-            GlideClient.downloadImage(
-                holder.itemView.context,
-                imgUrl, holder.albumImage
-            )
-        }
-
         holder.albumName.text = getItem(position).collectionName
+        holder.albumArtist.text = getItem(position).artistName
+        getItem(position)?.artworkUrl100?.let {
+            GlideClient.downloadImage(holder.itemView.context, it, holder.albumImage)
+        }
     }
-
-/*    override fun getItemCount(): Int {
-        val count = super.getItemCount()
-        return if (count == 0) 1 else count
-      }*/
 }

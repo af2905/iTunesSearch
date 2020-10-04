@@ -62,7 +62,6 @@ class SearchFragment : BaseFragment() {
         val bundle = Bundle()
         bundle.putInt("id", artist.artistId)
         bundle.putString("name", artist.artistName)
-
         findNavController().navigate(R.id.action_SearchFragment_to_AlbumsFragment, bundle)
     }
 }

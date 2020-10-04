@@ -26,14 +26,14 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/artist_image_view"
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/material_margin_normal"
                     android:scaleType="centerCrop"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
                     tools:background="@color/white"
-                    tools:src="@mipmap/ic_launcher" />
+                    app:srcCompat="@drawable/blank_vinyl_record" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:layout_width="wrap_content"
@@ -57,7 +57,8 @@
                             android:lines="1"
                             android:gravity="center"
                             android:textColor="@color/white"
-                            android:textSize="18sp"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
                             tools:text="Ricky Martin" />
 
                         <View

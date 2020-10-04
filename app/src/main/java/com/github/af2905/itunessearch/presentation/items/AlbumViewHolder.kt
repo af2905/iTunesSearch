@@ -9,4 +9,5 @@ import kotlinx.android.synthetic.main.item_album.view.*
 class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val albumImage: ImageView = itemView.album_image_view
     val albumName: TextView = itemView.album_name_text_view
+    val albumArtist: TextView = itemView.album_artist_name_text_view
 }
