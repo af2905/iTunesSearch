@@ -8,7 +8,6 @@ import com.github.af2905.itunessearch.R
 import com.github.af2905.itunessearch.presentation.items.AlbumViewHolder
 import com.github.af2905.itunessearch.presentation.items.IAlbumClickListener
 import com.github.af2905.itunessearch.repository.database.entity.AlbumEntity
-import com.github.af2905.itunessearch.repository.server.GlideClient
 import com.github.af2905.itunessearch.utils.AlbumItemDiffCallback
 
 class AlbumAdapter(private val clickListener: IAlbumClickListener<AlbumEntity>) :
@@ -28,10 +27,6 @@ class AlbumAdapter(private val clickListener: IAlbumClickListener<AlbumEntity>) 
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        holder.albumName.text = getItem(position).collectionName
-        holder.albumArtist.text = getItem(position).artistName
-        getItem(position)?.artworkUrl100?.let {
-            GlideClient.downloadImage(holder.itemView.context, it, holder.albumImage)
-        }
+        holder.bind(getItem(position))
     }
 }

@@ -7,17 +7,16 @@ import androidx.lifecycle.ViewModel
 import com.github.af2905.itunessearch.repository.Repository
 import com.github.af2905.itunessearch.repository.database.entity.AlbumEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
 
 class AlbumViewModel(private val repository: Repository) : ViewModel() {
-    private val disposeBag = CompositeDisposable()
+    private var requestDisposable = Disposables.empty()
     private val liveDataFoundAlbums = MutableLiveData<List<AlbumEntity>>()
 
     fun downloadAlbumsUponRequest(artistId: Int) {
-        disposeBag.add(
+        requestDisposable =
             repository.getAlbums(artistId)
-                .retry()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -26,7 +25,6 @@ class AlbumViewModel(private val repository: Repository) : ViewModel() {
                 }, {
 
                 })
-        )
     }
 
     fun getLiveDataFoundAlbums(): LiveData<List<AlbumEntity>> {
@@ -35,7 +33,7 @@ class AlbumViewModel(private val repository: Repository) : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        disposeBag.clear()
+        requestDisposable.dispose()
     }
 
     companion object {

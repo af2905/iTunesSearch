@@ -5,7 +5,7 @@ import com.github.af2905.itunessearch.repository.database.entity.AlbumEntity
 
 class AlbumItemDiffCallback : DiffUtil.ItemCallback<AlbumEntity>() {
     override fun areItemsTheSame(oldItem: AlbumEntity, newItem: AlbumEntity): Boolean =
-        oldItem == newItem
+        oldItem === newItem
 
     override fun areContentsTheSame(oldItem: AlbumEntity, newItem: AlbumEntity): Boolean =
         oldItem == newItem

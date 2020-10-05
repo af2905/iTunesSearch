@@ -17,10 +17,8 @@ import com.github.af2905.itunessearch.viewmodel.AlbumViewModel
 import kotlinx.android.synthetic.main.artist_header.*
 import kotlinx.android.synthetic.main.fragment_album.*
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 class AlbumFragment : BaseFragment() {
-    private var artistId by Delegates.notNull<Int>()
     private lateinit var recycler: RecyclerView
     private lateinit var adapter: AlbumAdapter
     private val albumClickListener: IAlbumClickListener<AlbumEntity> =
@@ -48,7 +46,7 @@ class AlbumFragment : BaseFragment() {
         recycler = albums_recycler_view
         recycler.adapter = adapter
         recycler.addItemDecoration(DivItemDecoration(16, 8))
-        artistId = requireArguments().getInt("id")
+        val artistId = requireArguments().getInt("id")
         artist_name_text_view.text = requireArguments().getString("name")
         viewModel?.downloadAlbumsUponRequest(artistId)
         loadDataFromViewModel()
