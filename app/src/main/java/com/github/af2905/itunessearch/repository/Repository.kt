@@ -16,7 +16,7 @@ class Repository(private val communicator: ServerCommunicator, private val datab
     fun getAlbums(artistId: Int): Single<List<AlbumEntity>> {
         return communicator.getAlbums(artistId)
             .map { database.albumDao().insertAlbums(it) }
-            .flatMap { Single.just(database.albumDao().getAll(artistId)) }
+            .map { database.albumDao().getAll(artistId) }
     }
 
     fun getTracks(collectionId: Int): Single<List<TrackEntity>> {
