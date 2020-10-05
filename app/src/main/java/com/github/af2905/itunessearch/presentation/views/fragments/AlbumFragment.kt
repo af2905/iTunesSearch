@@ -53,7 +53,9 @@ class AlbumFragment : BaseFragment() {
         recycler.addItemDecoration(DivItemDecoration(16, 8))
         val artistId = requireArguments().getInt(ARTIST_ID)
         artist_name_text_view.text = requireArguments().getString(ARTIST_NAME)
-        viewModel?.downloadAlbumsUponRequest(artistId)
+        if (savedInstanceState == null) {
+            viewModel?.downloadAlbumsUponRequest(artistId)
+        }
         loadDataFromViewModel()
     }
 

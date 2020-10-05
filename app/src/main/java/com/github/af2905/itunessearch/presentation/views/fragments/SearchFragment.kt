@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.github.af2905.itunessearch.Constants.ARTIST_ID
 import com.github.af2905.itunessearch.Constants.ARTIST_NAME
 import com.github.af2905.itunessearch.R
@@ -22,7 +21,6 @@ import kotlinx.android.synthetic.main.search_toolbar.view.*
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment() {
-    private lateinit var recycler: RecyclerView
     private lateinit var adapter: ArtistAdapter
     private val artistClickListener: IArtistClickListener<ArtistEntity> =
         object : IArtistClickListener<ArtistEntity> {
@@ -47,7 +45,7 @@ class SearchFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = ArtistAdapter(artistClickListener)
-        recycler = artists_recycler_view
+        val recycler = artists_recycler_view
         recycler.adapter = adapter
         loadDataFromViewModel()
         search_toolbar.search_edit_text.afterTextChanged {

@@ -8,14 +8,14 @@ import io.reactivex.Single
 class ServerCommunicator(private val apiService: ApiService) {
 
     fun getArtists(term: String): Single<List<ArtistEntity>> {
-        return apiService.getArtists(term).map { return@map it.results }
+        return apiService.getArtists(term).map { it.results }
     }
 
     fun getAlbums(artistId: Int): Single<List<AlbumEntity>> {
-        return apiService.getAlbums(artistId).map { return@map it.results }
+        return apiService.getAlbums(artistId).map { it.results }
     }
 
     fun getTracks(collectionId: Int): Single<List<TrackEntity>> {
-        return apiService.getTracks(collectionId).map { return@map it.results }
+        return apiService.getTracks(collectionId).map { it.results }
     }
 }
