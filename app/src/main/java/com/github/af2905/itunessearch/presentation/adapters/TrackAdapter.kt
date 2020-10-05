@@ -16,7 +16,6 @@ class TrackAdapter : ListAdapter<TrackEntity, TrackViewHolder>(TrackItemDiffCall
     }
 
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
-        holder.trackNumber.text = getItem(position).trackNumber.toString()
-        holder.trackName.text = getItem((position)).trackName
+        holder.bind(getItem(position))
     }
 }

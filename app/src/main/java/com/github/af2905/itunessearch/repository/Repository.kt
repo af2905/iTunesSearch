@@ -22,6 +22,6 @@ class Repository(private val communicator: ServerCommunicator, private val datab
     fun getTracks(collectionId: Int): Single<List<TrackEntity>> {
         return communicator.getTracks(collectionId)
             .map { database.trackDao().insertTracks(it) }
-            .flatMap { return@flatMap Single.just(database.trackDao().getAll(collectionId)) }
+            .map { database.trackDao().getAll(collectionId) }
     }
 }

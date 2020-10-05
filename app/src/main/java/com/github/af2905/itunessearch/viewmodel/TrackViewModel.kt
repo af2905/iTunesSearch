@@ -7,15 +7,15 @@ import androidx.lifecycle.ViewModel
 import com.github.af2905.itunessearch.repository.Repository
 import com.github.af2905.itunessearch.repository.database.entity.TrackEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
 
 class TrackViewModel(private val repository: Repository) : ViewModel() {
-    private val disposeBag = CompositeDisposable()
+    private var requestDisposable = Disposables.empty()
     private val liveDataTracks = MutableLiveData<List<TrackEntity>>()
 
     fun downloadTracksUponRequest(collectionId: Int) {
-        disposeBag.add(
+        requestDisposable =
             repository.getTracks(collectionId)
                 .retry()
                 .subscribeOn(Schedulers.io())
@@ -26,7 +26,6 @@ class TrackViewModel(private val repository: Repository) : ViewModel() {
                 }, {
 
                 })
-        )
     }
 
     fun getLiveDataTracks(): LiveData<List<TrackEntity>> {
@@ -35,7 +34,7 @@ class TrackViewModel(private val repository: Repository) : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        disposeBag.clear()
+        requestDisposable.dispose()
     }
 
     companion object {

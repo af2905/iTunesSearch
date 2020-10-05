@@ -43,9 +43,11 @@ class TrackFragment : BaseFragment() {
         recycler.adapter = adapter
         recycler.addItemDecoration(DivItemDecoration(16, 8))
         getArgumentsAndSetThemIntoViews()
-
         val collectionId = requireArguments().getInt(ALBUM_ID)
-        viewModel?.downloadTracksUponRequest(collectionId)
+
+        if (savedInstanceState == null) {
+            viewModel?.downloadTracksUponRequest(collectionId)
+        }
         loadDataFromViewModel()
     }
 

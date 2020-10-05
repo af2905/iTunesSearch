@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers
 
 class AlbumViewModel(private val repository: Repository) : ViewModel() {
     private var requestDisposable = Disposables.empty()
-    private val liveDataFoundAlbums = MutableLiveData<List<AlbumEntity>>()
+    private val liveDataAlbums = MutableLiveData<List<AlbumEntity>>()
 
     fun downloadAlbumsUponRequest(artistId: Int) {
         requestDisposable =
@@ -21,14 +21,14 @@ class AlbumViewModel(private val repository: Repository) : ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     Log.d(TAG, it.toString())
-                    liveDataFoundAlbums.value = it
+                    liveDataAlbums.value = it
                 }, {
 
                 })
     }
 
-    fun getLiveDataFoundAlbums(): LiveData<List<AlbumEntity>> {
-        return liveDataFoundAlbums
+    fun getLiveDataAlbums(): LiveData<List<AlbumEntity>> {
+        return liveDataAlbums
     }
 
     override fun onCleared() {
