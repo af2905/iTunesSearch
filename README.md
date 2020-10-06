@@ -13,13 +13,11 @@ The third screen shows information about the songs in the selected album.
 Navigation between fragments is done with androidx.navigation
 <img src="https://github.com/af2905/iTunesSearch/blob/readme/app/images/iTunesSearchNav.png" width="800">
 
+***
 ## Configurations
 The project uses Gradle. The application is built using command build.gradle.
 
-***
 #### Used libraries:
-
-***
 <img src="https://github.com/af2905/iTunesSearch/blob/readme/app/images/iTunesSearchTech.png" width="800">
 
 ***
