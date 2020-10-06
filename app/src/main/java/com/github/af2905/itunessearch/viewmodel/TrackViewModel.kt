@@ -17,7 +17,6 @@ class TrackViewModel(private val repository: Repository) : ViewModel() {
     fun downloadTracksUponRequest(collectionId: Int) {
         requestDisposable =
             repository.getTracks(collectionId)
-                .retry()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
