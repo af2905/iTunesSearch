@@ -10,19 +10,27 @@
         android:name="com.github.af2905.itunessearch.presentation.views.fragments.SearchFragment"
         android:label="@string/search_fragment_label"
         tools:layout="@layout/fragment_search">
-
         <action
-            android:id="@+id/action_SearchFragment_to_AlbumsFragment"
-            app:destination="@id/AlbumsFragment" />
+            android:id="@+id/action_SearchFragment_to_AlbumFragment"
+            app:destination="@id/AlbumFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/AlbumsFragment"
+        android:id="@+id/AlbumFragment"
         android:name="com.github.af2905.itunessearch.presentation.views.fragments.AlbumFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/album_fragment_label"
         tools:layout="@layout/fragment_album">
-
         <action
-            android:id="@+id/action_AlbumsFragment_to_SearchFragment"
-            app:destination="@id/SearchFragment" />
+            android:id="@+id/action_AlbumFragment_to_TrackFragment"
+            app:destination="@id/TrackFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/TrackFragment"
+        android:name="com.github.af2905.itunessearch.presentation.views.fragments.TrackFragment"
+        android:label="@string/track_fragment_label"
+        tools:layout="@layout/fragment_track">
+
+    </fragment>
+
 </navigation>

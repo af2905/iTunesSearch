@@ -5,37 +5,36 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.af2905.itunessearch.repository.Repository
-import com.github.af2905.itunessearch.repository.database.entity.ArtistEntity
+import com.github.af2905.itunessearch.repository.database.entity.TrackEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
 
-class SearchViewModel(private val repository: Repository) : ViewModel() {
-    private val disposeBag = CompositeDisposable()
-    private val liveDataArtists = MutableLiveData<List<ArtistEntity>>()
+class TrackViewModel(private val repository: Repository) : ViewModel() {
+    private var requestDisposable = Disposables.empty()
+    private val liveDataTracks = MutableLiveData<List<TrackEntity>>()
 
-    fun downloadArtistsUponRequest(term: String) {
-        disposeBag.add(
-            repository.getArtists(term)
-                .retry()
+    fun downloadTracksUponRequest(collectionId: Int) {
+        requestDisposable.dispose()
+        requestDisposable =
+            repository.getTracks(collectionId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     Log.d(TAG, it.toString())
-                    liveDataArtists.value = it
+                    liveDataTracks.value = it
                 }, {
 
                 })
-        )
     }
 
-    fun getLiveDataArtists(): LiveData<List<ArtistEntity>> {
-        return liveDataArtists
+    fun getLiveDataTracks(): LiveData<List<TrackEntity>> {
+        return liveDataTracks
     }
 
     override fun onCleared() {
         super.onCleared()
-        disposeBag.clear()
+        requestDisposable.dispose()
     }
 
     companion object {
