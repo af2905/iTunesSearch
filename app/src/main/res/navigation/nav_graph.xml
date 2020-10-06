@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/AlbumsFragment"
-        android:name="com.github.af2905.itunessearch.presentation.views.fragments.AlbumsFragment"
+        android:name="com.github.af2905.itunessearch.presentation.views.fragments.AlbumFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_albums">
+        tools:layout="@layout/fragment_album">
 
         <action
             android:id="@+id/action_AlbumsFragment_to_SearchFragment"
