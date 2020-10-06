@@ -1,6 +1,5 @@
 package com.github.af2905.itunessearch.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,12 +19,7 @@ class TrackViewModel(private val repository: Repository) : ViewModel() {
             repository.getTracks(collectionId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    Log.d(TAG, it.toString())
-                    liveDataTracks.value = it
-                }, {
-
-                })
+                .subscribe({ liveDataTracks.value = it }, { })
     }
 
     fun getLiveDataTracks(): LiveData<List<TrackEntity>> {
@@ -35,9 +29,5 @@ class TrackViewModel(private val repository: Repository) : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         requestDisposable.dispose()
-    }
-
-    companion object {
-        private const val TAG = "TEST_OF_LOADING_DATA"
     }
 }

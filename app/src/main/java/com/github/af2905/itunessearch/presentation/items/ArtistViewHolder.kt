@@ -1,10 +1,15 @@
 package com.github.af2905.itunessearch.presentation.items
 
 import android.view.View
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_artist.view.*
+import com.github.af2905.itunessearch.repository.database.entity.ArtistEntity
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_artist.*
 
-class ArtistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val artistName: TextView = itemView.artist_name_text_view
+class ArtistViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
+    LayoutContainer {
+
+    fun bind(artist: ArtistEntity) {
+        artist_name_text_view.text = artist.artistName
+    }
 }
