@@ -32,8 +32,7 @@ class AlbumFragment : BaseFragment() {
                 showAlbumDetail(m)
             }
         }
-    var viewModel: AlbumViewModel? = null
-        @Inject set
+    lateinit var viewModel: AlbumViewModel @Inject set
 
     override fun injectDependency(component: ViewModelComponent) {
         component.inject(this)
@@ -54,14 +53,13 @@ class AlbumFragment : BaseFragment() {
         val artistId = requireArguments().getInt(ARTIST_ID)
         artist_name_text_view.text = requireArguments().getString(ARTIST_NAME)
         if (savedInstanceState == null) {
-            viewModel?.downloadAlbumsUponRequest(artistId)
+            viewModel.downloadAlbumsUponRequest(artistId)
         }
         loadDataFromViewModel()
     }
 
     private fun loadDataFromViewModel() {
-        viewModel?.getLiveDataAlbums()
-            ?.observe(viewLifecycleOwner, { adapter.submitList(it) })
+        viewModel.getLiveDataAlbums().observe(viewLifecycleOwner, { adapter.submitList(it) })
     }
 
     private fun showAlbumDetail(album: AlbumEntity) {

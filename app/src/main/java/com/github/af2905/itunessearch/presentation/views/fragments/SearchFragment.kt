@@ -29,8 +29,7 @@ class SearchFragment : BaseFragment() {
             }
         }
 
-    var viewModel: SearchViewModel? = null
-        @Inject set
+    lateinit var viewModel: SearchViewModel @Inject set
 
     override fun injectDependency(component: ViewModelComponent) {
         component.inject(this)
@@ -49,13 +48,12 @@ class SearchFragment : BaseFragment() {
         recycler.adapter = adapter
         loadDataFromViewModel()
         search_toolbar.search_edit_text.afterTextChanged {
-            viewModel?.downloadArtistsUponRequest(it.toString())
+            viewModel.downloadArtistsUponRequest(it.toString())
         }
     }
 
     private fun loadDataFromViewModel() {
-        viewModel?.getLiveDataArtists()
-            ?.observe(viewLifecycleOwner, { adapter.submitList(it) })
+        viewModel.getLiveDataArtists().observe(viewLifecycleOwner, { adapter.submitList(it) })
     }
 
     private fun showAlbums(artist: ArtistEntity) {
