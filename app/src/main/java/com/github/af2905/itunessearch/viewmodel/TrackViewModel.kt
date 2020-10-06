@@ -15,6 +15,7 @@ class TrackViewModel(private val repository: Repository) : ViewModel() {
     private val liveDataTracks = MutableLiveData<List<TrackEntity>>()
 
     fun downloadTracksUponRequest(collectionId: Int) {
+        requestDisposable.dispose()
         requestDisposable =
             repository.getTracks(collectionId)
                 .subscribeOn(Schedulers.io())

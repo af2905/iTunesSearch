@@ -23,8 +23,7 @@ import javax.inject.Inject
 
 class TrackFragment : BaseFragment() {
     private lateinit var adapter: TrackAdapter
-    var viewModel: TrackViewModel? = null
-        @Inject set
+    lateinit var viewModel: TrackViewModel @Inject set
 
     override fun injectDependency(component: ViewModelComponent) {
         component.inject(this)
@@ -46,7 +45,7 @@ class TrackFragment : BaseFragment() {
         val collectionId = requireArguments().getInt(ALBUM_ID)
 
         if (savedInstanceState == null) {
-            viewModel?.downloadTracksUponRequest(collectionId)
+            viewModel.downloadTracksUponRequest(collectionId)
         }
         loadDataFromViewModel()
     }
@@ -67,6 +66,6 @@ class TrackFragment : BaseFragment() {
     }
 
     private fun loadDataFromViewModel() {
-        viewModel?.getLiveDataTracks()?.observe(viewLifecycleOwner, { adapter.submitList(it) })
+        viewModel.getLiveDataTracks().observe(viewLifecycleOwner, { adapter.submitList(it) })
     }
 }
