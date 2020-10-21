@@ -3,13 +3,13 @@ package com.github.af2905.itunessearch.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.af2905.itunessearch.repository.Repository
+import com.github.af2905.itunessearch.repository.TrackRepository
 import com.github.af2905.itunessearch.repository.database.entity.TrackEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
 
-class TrackViewModel(private val repository: Repository) : ViewModel() {
+class TrackViewModel(private val repository: TrackRepository) : ViewModel() {
     private var requestDisposable = Disposables.empty()
     private val liveDataTracks = MutableLiveData<List<TrackEntity>>()
 
