@@ -3,7 +3,8 @@ package com.github.af2905.itunessearch.di.module
 import com.github.af2905.itunessearch.repository.AlbumRepository
 import com.github.af2905.itunessearch.repository.SearchRepository
 import com.github.af2905.itunessearch.repository.TrackRepository
-import com.github.af2905.itunessearch.repository.database.AppDatabase
+import com.github.af2905.itunessearch.repository.database.dao.AlbumDao
+import com.github.af2905.itunessearch.repository.database.dao.TrackDao
 import com.github.af2905.itunessearch.repository.server.ServerCommunicator
 import dagger.Module
 import dagger.Provides
@@ -20,16 +21,16 @@ class RepositoryModule {
     @Reusable
     @Provides
     fun providesAlbumRepository(
-        communicator: ServerCommunicator, database: AppDatabase
+        communicator: ServerCommunicator, albumDao: AlbumDao
     ): AlbumRepository {
-        return AlbumRepository(communicator, database.albumDao())
+        return AlbumRepository(communicator, albumDao)
     }
 
     @Reusable
     @Provides
     fun providesTrackRepository(
-        communicator: ServerCommunicator, database: AppDatabase
+        communicator: ServerCommunicator, trackDao: TrackDao
     ): TrackRepository {
-        return TrackRepository(communicator, database.trackDao())
+        return TrackRepository(communicator, trackDao)
     }
 }
