@@ -8,8 +8,9 @@ import com.github.af2905.itunessearch.repository.database.entity.ArtistEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class SearchViewModel(private val repository: SearchRepository) : ViewModel() {
+class SearchViewModel @Inject constructor(private val repository: SearchRepository) : ViewModel() {
     private var requestDisposable = Disposables.empty()
     private val liveDataArtists = MutableLiveData<List<ArtistEntity>>()
 

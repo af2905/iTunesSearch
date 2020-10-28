@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.github.af2905.itunessearch.Constants.ALBUM_ID
 import com.github.af2905.itunessearch.Constants.ALBUM_NAME
 import com.github.af2905.itunessearch.Constants.ALBUM_URL
@@ -23,7 +24,9 @@ import javax.inject.Inject
 
 class TrackFragment : BaseFragment() {
     private lateinit var adapter: TrackAdapter
-    lateinit var viewModel: TrackViewModel @Inject set
+
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
 
     override fun injectDependency(component: ViewModelComponent) {
         component.inject(this)
@@ -37,6 +40,7 @@ class TrackFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val viewModel = ViewModelProvider(this, factory).get(TrackViewModel::class.java)
         adapter = TrackAdapter()
         val recycler = track_recycler_view
         recycler.adapter = adapter
@@ -46,7 +50,7 @@ class TrackFragment : BaseFragment() {
         if (savedInstanceState == null) {
             viewModel.downloadTracksUponRequest(collectionId)
         }
-        loadDataFromViewModel()
+        loadDataFromViewModel(viewModel)
     }
 
     private fun getArgumentsAndSetThemIntoViews() {
@@ -64,7 +68,7 @@ class TrackFragment : BaseFragment() {
         )
     }
 
-    private fun loadDataFromViewModel() {
+    private fun loadDataFromViewModel(viewModel: TrackViewModel) {
         viewModel.getLiveDataTracks().observe(viewLifecycleOwner, { adapter.submitList(it) })
     }
 }

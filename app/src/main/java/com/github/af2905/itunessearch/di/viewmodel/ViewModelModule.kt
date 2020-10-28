@@ -2,30 +2,23 @@ package com.github.af2905.itunessearch.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.github.af2905.itunessearch.repository.AlbumRepository
-import com.github.af2905.itunessearch.repository.SearchRepository
-import com.github.af2905.itunessearch.repository.TrackRepository
 import com.github.af2905.itunessearch.viewmodel.AlbumViewModel
 import com.github.af2905.itunessearch.viewmodel.SearchViewModel
 import com.github.af2905.itunessearch.viewmodel.TrackViewModel
-import dagger.*
+import dagger.Binds
+import dagger.MapKey
+import dagger.Module
+import dagger.Reusable
 import dagger.multibindings.IntoMap
 import javax.inject.Inject
 import javax.inject.Provider
-import javax.inject.Singleton
 import kotlin.reflect.KClass
 
-@MustBeDocumented
-@Target(
-    AnnotationTarget.FUNCTION,
-    AnnotationTarget.PROPERTY_GETTER,
-    AnnotationTarget.PROPERTY_SETTER
-)
 @Retention(AnnotationRetention.RUNTIME)
 @MapKey
 internal annotation class ViewModelKey(val value: KClass<out ViewModel>)
 
-@Singleton
+@Reusable
 class ViewModelFactory @Inject constructor(
     private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
@@ -38,23 +31,6 @@ class ViewModelFactory @Inject constructor(
 
 @Module
 abstract class ViewModelModule {
-    @Reusable
-    @Provides
-    fun providesArtistViewModel(repository: SearchRepository): SearchViewModel {
-        return SearchViewModel(repository)
-    }
-
-    @Reusable
-    @Provides
-    fun providesAlbumViewModel(repository: AlbumRepository): AlbumViewModel {
-        return AlbumViewModel(repository)
-    }
-
-    @Reusable
-    @Provides
-    fun provideTrackViewModel(repository: TrackRepository): TrackViewModel {
-        return TrackViewModel(repository)
-    }
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
