@@ -8,8 +8,9 @@ import com.github.af2905.itunessearch.repository.database.entity.TrackEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class TrackViewModel(private val repository: TrackRepository) : ViewModel() {
+class TrackViewModel@Inject constructor(private val repository: TrackRepository) : ViewModel() {
     private var requestDisposable = Disposables.empty()
     private val liveDataTracks = MutableLiveData<List<TrackEntity>>()
 

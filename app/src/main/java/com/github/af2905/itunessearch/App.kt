@@ -9,7 +9,6 @@ import com.github.af2905.itunessearch.di.module.RepositoryModule
 import com.github.af2905.itunessearch.di.repository.DaggerRepositoryComponent
 import com.github.af2905.itunessearch.di.viewmodel.DaggerViewModelComponent
 import com.github.af2905.itunessearch.di.viewmodel.ViewModelComponent
-import com.github.af2905.itunessearch.di.viewmodel.ViewModelModule
 
 class App : Application() {
     private lateinit var viewModelComponent: ViewModelComponent
@@ -36,7 +35,6 @@ class App : Application() {
 
         viewModelComponent = DaggerViewModelComponent.builder()
             .repositoryComponent(repositoryComponent)
-            .viewModelModule(ViewModelModule())
             .build()
     }
 

@@ -13,7 +13,7 @@ import dagger.Component
     dependencies = [ApiComponent::class, DatabaseComponent::class]
 )
 interface RepositoryComponent {
-    val searchRepository: SearchRepository
-    val albumRepository: AlbumRepository
-    val trackRepository: TrackRepository
+    fun getSearchRepository(): SearchRepository
+    fun getAlbumRepository(): AlbumRepository
+    fun getTrackRepository(): TrackRepository
 }

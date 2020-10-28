@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.af2905.itunessearch.Constants.ALBUM_ID
 import com.github.af2905.itunessearch.Constants.ALBUM_NAME
@@ -32,7 +33,9 @@ class AlbumFragment : BaseFragment() {
                 showAlbumDetail(m)
             }
         }
-    lateinit var viewModel: AlbumViewModel @Inject set
+
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
 
     override fun injectDependency(component: ViewModelComponent) {
         component.inject(this)
@@ -46,6 +49,7 @@ class AlbumFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val viewModel = ViewModelProvider(this, factory).get(AlbumViewModel::class.java)
         adapter = AlbumAdapter(albumClickListener)
         val recycler = albums_recycler_view
         recycler.adapter = adapter
@@ -55,10 +59,10 @@ class AlbumFragment : BaseFragment() {
         if (savedInstanceState == null) {
             viewModel.downloadAlbumsUponRequest(artistId)
         }
-        loadDataFromViewModel()
+        loadDataFromViewModel(viewModel)
     }
 
-    private fun loadDataFromViewModel() {
+    private fun loadDataFromViewModel(viewModel: AlbumViewModel) {
         viewModel.getLiveDataAlbums().observe(viewLifecycleOwner, { adapter.submitList(it) })
     }
 

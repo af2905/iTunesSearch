@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.af2905.itunessearch.Constants.ARTIST_ID
 import com.github.af2905.itunessearch.Constants.ARTIST_NAME
@@ -29,7 +30,8 @@ class SearchFragment : BaseFragment() {
             }
         }
 
-    lateinit var viewModel: SearchViewModel @Inject set
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
 
     override fun injectDependency(component: ViewModelComponent) {
         component.inject(this)
@@ -43,16 +45,17 @@ class SearchFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
         adapter = ArtistAdapter(artistClickListener)
         val recycler = artists_recycler_view
         recycler.adapter = adapter
-        loadDataFromViewModel()
+        loadDataFromViewModel(viewModel)
         search_toolbar.search_edit_text.afterTextChanged {
             viewModel.downloadArtistsUponRequest(it.toString())
         }
     }
 
-    private fun loadDataFromViewModel() {
+    private fun loadDataFromViewModel(viewModel: SearchViewModel) {
         viewModel.getLiveDataArtists().observe(viewLifecycleOwner, { adapter.submitList(it) })
     }
 
